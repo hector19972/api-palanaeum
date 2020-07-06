@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 router.get('/enviar1/:mensaje/:asunto', async (req, res) => {
     console.log(req.params.mensaje, '  ', req.params.asunto);
@@ -90,6 +91,9 @@ router.get('/enviar/:mensaje/:asunto/', async (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    res.sendFile('/index.html', { root: path.join(__dirname, '../public') });
+});
+router.get('', (req, res) => {
     res.sendFile('index.html', { root: path.join(__dirname, '../public') });
 });
 
