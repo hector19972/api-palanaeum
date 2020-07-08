@@ -5,7 +5,7 @@ const path = require('path');
 router.get('/enviar1/:mensaje/:asunto', async (req, res) => {
     console.log(req.params.mensaje, '  ', req.params.asunto);
     var jsonData = `{"Correo":[{"mensaje":"${req.params.mensaje}"},{"asunto":"${req.params.asunto}"}]}`;
-    
+
     var jsonParsed = JSON.parse(jsonData);
     res.json(jsonParsed);
 });
@@ -36,7 +36,7 @@ router.get('/enviar/:mensaje/:asunto/:correo', async (req, res) => {
         text: req.params.mensaje,
         html: `<b>Un usuario a tenido problemas:</b><p>${req.params.mensaje}</p>
         <br>
-        <h1>Atentamente ${{req.params.correo}}</h1>`
+        <h1>Atentamente ${ req.params.correo }</h1>`
     }
 
     transport.sendMail(mail, function (error, info) {
@@ -50,14 +50,14 @@ router.get('/enviar/:mensaje/:asunto/:correo', async (req, res) => {
 
         transport.close();
     });
-     /* verify connection configuration
-    transport.verify(function (error, success) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Server is ready to take our messages");
-        }
-    });*/
+    /* verify connection configuration
+   transport.verify(function (error, success) {
+       if (error) {
+           console.log(error);
+       } else {
+           console.log("Server is ready to take our messages");
+       }
+   });*/
     // const correo = require('../enviarCorreo');
     /*
     var nodemailer = require('nodemailer');
