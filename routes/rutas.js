@@ -9,7 +9,7 @@ router.get('/enviar1/:mensaje/:asunto', async (req, res) => {
     var jsonParsed = JSON.parse(jsonData);
     res.json(jsonParsed);
 });
-router.get('/enviar/:mensaje/:asunto/:correo', async (req, res) => {
+router.get('/enviar/:mensaje/:asunto', async (req, res) => {
     console.log(req.params.mensaje, '  ', req.params.asunto);
     var nodemailer = require('nodemailer');
     var smtpTransport = require('nodemailer-smtp-transport');
@@ -36,7 +36,7 @@ router.get('/enviar/:mensaje/:asunto/:correo', async (req, res) => {
         text: req.params.mensaje,
         html: `<b>Un usuario a tenido problemas:</b><p>${req.params.mensaje}</p>
         <br>
-        <h1>Atentamente ${ req.params.correo }</h1>`
+        `
     }
 
     transport.sendMail(mail, function (error, info) {
